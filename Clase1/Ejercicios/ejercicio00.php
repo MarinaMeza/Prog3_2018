@@ -1,20 +1,19 @@
 <?php
     $salida;
 
-    $a = 3;
-    $b = 2;
-    $c = 1;
+    $a = 2;
+    $b = 1;
+    $c = 3;
 
-    if($a > $b && $a > $c)
-    {
+    if ($a > $b && $a > $c) {
         $salida = $a;
     }
-    if($b > $a && $b > $c)
-    {
+    else if ($b > $a && $b > $c) {
         $salida = $b;
     }
-    if($c > $a && ){
+    else { 
         $salida = $c;
     }
+
     echo $salida;
 ?>
