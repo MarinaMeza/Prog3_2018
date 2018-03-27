@@ -1,6 +1,6 @@
 <?php
 require_once "direccion.php";
-class Persona implements iMostrar{
+abstract class Persona implements iMostrar{
     private $nombre;
     private $apellido;
     private $dni;
@@ -54,6 +54,7 @@ class Persona implements iMostrar{
 
         return $salida;
     }
+    
 }
 
 ?>
