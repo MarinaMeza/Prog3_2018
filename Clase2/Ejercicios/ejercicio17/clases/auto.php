@@ -49,7 +49,7 @@
             return $respuesta;
         }
 
-        public function Equals($pAuto1, $pAuto2) {
+        public function Equals($pAuto1, $pAuto2) {//ARREGLAR PARA QUE RECIBA UNO SOLO PORQUE ASI 0 SENTIDO
             $respuesta = FALSE;
             if($pAuto1->_marca == $pAuto2->_marca) {
                 $respuesta = TRUE;
