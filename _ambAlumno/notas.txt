@@ -1,0 +1,19 @@
+crear abm de alumno
+clase alumno(archivos/alumno.txt):
+nombre
+legajo
+foto
+se guarda en el archivo alumno.txt
+la foto es nombre+legajo.ext
+se guarda en el subdir fotos
+ALTA
+de los datos que paso por post son nombre y legajo pero paso el archivo que se llama archivo.
+BAJA
+crear primero un directorio que se llame alumnosborrados/alumnos.txt
+y fotosborradas/nombre+legajo+fecha.ext
+MODIFICACION
+lo mismo que en baja pero ademas de guardar los datos nuevos como en alta guardamos en
+alumnomodificado/alumno.txt y fotocambiada/foto+fecha.txt lo que estoy reemplazandoc como backup
+LISTADO
+podemos devolver una tabla html con el tag (llama a nexo por get)
+se puede ver en chrome

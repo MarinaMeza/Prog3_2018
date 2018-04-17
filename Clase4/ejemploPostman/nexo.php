@@ -4,7 +4,8 @@ require_once ("Entidades/archivo.php");
 //var_dump($_POST);
 var_dump($_POST);
 var_dump($_FILES);
-$queHago = isset($_POST['queHago']) ? $_POST['queHago'] : NULL;
+$queHago = isset($_POST['queHago']) ? $_POST['queHago'] : NULL;//si esta setteado le pasa el valor de
+//'queHago', si no pasa NULL
 
 switch($queHago){
 
