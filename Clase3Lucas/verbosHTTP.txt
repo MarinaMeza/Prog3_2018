@@ -1,0 +1,6 @@
+Acciones
+GET - traer todos - en la misma firma(url) estan los datos - da información
+POST - guardar todos - se usa para subir archivos
+PUT - modificar todos
+DELETE - borrar todos
+REQUEST - tiene todos los anteriores - variable superglobal - no es recomendable usarlos - usualmente se usa para verificar que trae una api

@@ -1,0 +1,21 @@
+Se deben crear las siguientes clases con sus atributos y métodos:
+
+1. Clase vehículo
+atributos privados patente, horaIngreso
+constructor que recibe los 2 parametros
+metodo estacionar que devuelve true o false
+getPatente que devuelve la patente
+sacar que recibe patente y devuelve importe
+traerTodos trae el listado de vehiculos estacionados
+y guardarTodos que recibe un listado de vehiculos y los guarda, devuelve un true o false
+
+2. Clase facturado
+atributos privados: vehiculo, horaSalida e importe
+constructor recibe un vehiculo y una hora de salida
+un metodo traerTodos trae todos los facturados
+guardarTodos retorna true o false y recibe un listado de facturados
+
+3. Clase UITablas
+dos metodos
+crearTablaEstacionados
+crearTablaFacturado
