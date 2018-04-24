@@ -50,10 +50,29 @@ FROM `proveedores` AS PV
 WHERE PV.Nombre LIKE '%i%'
 
 11.	Agregar el producto numero  4, llamado ‘Chocolate’, de tamaño chico y con un precio de 25,35.
+INSERT INTO `productos`(`pNumero`, `pNombre`, `Precio`, `Tamaño`) VALUES (4,"Chocolate",25.35,"Chico")
+
 12.	Insertar un nuevo proveedor (únicamente con los campos obligatorios).
+INSERT INTO `proveedores`(`Nombre`, `Domicilio`, `Localidad`) VALUES ("Mascheroni","Espora 565","Lanus")
+
 13.	Insertar un nuevo proveedor (107), donde el nombre y la localidad son ‘Rosales’ y ‘La Plata’.
+INSERT INTO `proveedores`(`Numero`, `Nombre`, `Localidad`) VALUES (107,"Rosales","La Plata")
+
 14.	Cambiar los precios de los productos de tamaño ‘grande’ a 97,50.
+UPDATE `productos` 
+SET `Precio`= 97.50
+WHERE `Tamaño` = "Grande"
+
 15.	Cambiar el tamaño de ‘Chico’ a ‘Mediano’ de todos los productos cuyas cantidades sean mayores a 300 inclusive.
+UPDATE `productos` AS P, `envios` AS E
+SET `Tamaño`="Mediano" 
+WHERE P.Tamaño = "Chico" AND E.Cantidad >= 300 AND P.pNumero = E.pNumero
+
 16.	Eliminar el  producto número 1.
+DELETE FROM `productos`
+WHERE pNumero = 1
+
 17.	Eliminar a todos los proveedores que no han enviado productos.
+DELETE FROM `proveedores`
+WHERE Numero NOT IN (SELECT Numero FROM `envios`)
 
