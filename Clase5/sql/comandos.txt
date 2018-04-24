@@ -1,0 +1,72 @@
+INSERT INTO `usuario`(`nombre`) VALUES ("Jose"), ("Maria"), ("Jesus")
+
+INSERT INTO `puestotrabajo`(`Descripcion`, `Piso`, `Sector`) VALUES
+("Windows 7", 2, "Soporte"),
+("Windows 95", 3, "Testing"),
+("Debian", 4, "Desarrollo"),
+("Ubuntu", 4, "Desarrollo"),
+("Parrot", 5, "Seguridad")
+
+sin condicion modifica todos los nombres
+UPDATE `usuario` SET `Nombre`="Julian" WHERE 1 
+la condicion del WHERE hace que se modifique solo el que tiene id 1
+UPDATE `usuario` SET `Nombre`="Maria" WHERE `IDusuario` = 1
+
+borra usuarios cuyo id sea mayor a 3
+DELETE FROM `usuario` WHERE `IDusuario`> 3
+
+
+INSERT INTO `usuariotrabajo`(`IDusuario`, `IDpuesto`, `fecha`) VALUES
+(1,1,"2018-03-01"),
+(1,1,"2018-04-01"),
+(1,5,"2018-02-01"),
+(2,3,"2018-01-01"),
+(2,3,"2018-05-10"),
+(3,4,"2018-05-01")
+
+
+Devuelve todo
+SELECT *
+FROM `usuario` AS U
+WHERE 1 = 1
+
+Devuelve todos los nombres
+SELECT U.Nombre
+FROM `usuario` AS U
+WHERE 1 = 1
+
+Devuelve nombre del usuario 2
+SELECT U.Nombre
+FROM `usuario` AS U
+WHERE `IDusuario` = 2
+
+Cuando muestra le cambia el nombre a la columna descripcion
+SELECT P.Descripcion AS Sistema
+FROM `puestotrabajo` AS P
+WHERE 1 = 1
+
+Devuelve todo tal cual esta en la tabla
+SELECT *
+FROM `usuariotrabajo` 
+WHERE 1 = 1
+
+Devuelve con los datos que representan los id en vez de los numeros pero da mal (en este caso da 90 resultados)
+SELECT U.Nombre AS `Usuario`, T.Descripcion AS `Sistema`
+FROM `usuariotrabajo` as UT, `usuario` AS U, `puestotrabajo` AS T
+WHERE 1 = 1
+
+Devuelve correctamente lo anterior (solo muestra las entradas donde coinciden los ID)
+SELECT U.Nombre AS `Usuario`, T.Descripcion AS `Sistema`
+FROM `usuariotrabajo` as UT, `usuario` AS U, `puestotrabajo` AS T
+WHERE UT.IDusuario = U.IDusuario AND UT.IDpuesto = T.IDpuesto
+
+Devuelve la cantidad de lo filtrado en el caso anterior
+SELECT COUNT(*) AS Cantidad
+FROM `usuariotrabajo` as UT, `usuario` AS U, `puestotrabajo` AS T
+WHERE UT.IDusuario = U.IDusuario AND UT.IDpuesto = T.IDpuesto
+
+Devuelve la consulta en orden ascendente de nombre (no hace falta agregar ASC porque es el default)
+SELECT U.Nombre AS Usuario, T.Descripcion AS Sistema
+FROM `usuariotrabajo` as UT, `usuario` AS U, `puestotrabajo` AS T
+WHERE UT.IDusuario = U.IDusuario AND UT.IDpuesto = T.IDpuesto
+ORDER BY U.Nombre ASC
