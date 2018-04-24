@@ -1,0 +1,59 @@
+1.  Obtener los detalles completos de todos los productos, ordenados alfabéticamente.
+SELECT *
+FROM `productos` 
+WHERE 1
+
+2.	Obtener los detalles completos de todos los proveedores de ‘Quilmes’.
+SELECT *
+FROM `proveedores`
+WHERE `Localidad` = "Quilmes"
+
+3.	Obtener todos los envíos en los cuales la cantidad este entre 200 y 300 inclusive.
+SELECT *
+FROM `envios` AS E
+WHERE E.Cantidad > 200 AND E.Cantidad <= 300
+
+4.	Obtener la cantidad total de todos los productos enviados.
+SELECT SUM(E.Cantidad)
+FROM `envios` AS E
+WHERE 1
+
+5.	Mostrar los primeros 3 números de productos que se han enviado.
+SELECT *
+FROM `envios`
+WHERE 1
+LIMIT 3
+
+6.	Mostrar los nombres de proveedores y los nombres de los productos enviados.
+SELECT PD.pNombre AS Nombre_Producto, PV.Nombre AS Nombre_Proveedor
+FROM `envios` AS E, `productos` AS PD,`proveedores` AS PV
+WHERE E.Numero = PV.Numero AND E.pNumero = PD.pNumero
+
+7.	Indicar el monto (cantidad * precio) de todos los envíos.  
+SELECT SUM(PD.Precio * E.Cantidad) AS Monto_todos_los_envios
+FROM `envios` AS E, `productos` AS PD
+WHERE E.pNumero = PD.pNumero         
+           
+8.	Obtener la cantidad total del producto 1 enviado por el proveedor 102.
+SELECT SUM(E.Cantidad) AS Total_Caramelos_Aguirre
+FROM `envios` AS E
+WHERE E.pNumero = 1 AND E.Numero = 102
+
+9.	Obtener todos los números de los productos suministrados por algún proveedor de ‘Avellaneda’.
+SELECT E.pNumero AS Numero
+FROM `envios` AS E, `productos` AS PD,`proveedores` AS PV
+WHERE PV.Localidad = "Avellaneda" AND E.Numero = PV.Numero AND E.pNumero = PD.pNumero
+
+10.	Obtener los domicilios y localidades de los proveedores cuyos nombres contengan la letra ‘I’.
+SELECT PV.Domicilio, PV.Localidad
+FROM `proveedores` AS PV
+WHERE PV.Nombre LIKE '%i%'
+
+11.	Agregar el producto numero  4, llamado ‘Chocolate’, de tamaño chico y con un precio de 25,35.
+12.	Insertar un nuevo proveedor (únicamente con los campos obligatorios).
+13.	Insertar un nuevo proveedor (107), donde el nombre y la localidad son ‘Rosales’ y ‘La Plata’.
+14.	Cambiar los precios de los productos de tamaño ‘grande’ a 97,50.
+15.	Cambiar el tamaño de ‘Chico’ a ‘Mediano’ de todos los productos cuyas cantidades sean mayores a 300 inclusive.
+16.	Eliminar el  producto número 1.
+17.	Eliminar a todos los proveedores que no han enviado productos.
+
