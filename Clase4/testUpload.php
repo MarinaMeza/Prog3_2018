@@ -13,6 +13,7 @@
     //$extension = end($arrayNombre);
     $tipoDeArechivo = pathinfo($_FILES['archivo']['name'],PATHINFO_EXTENSION);
 
+
     var_dump($tipoDeArechivo);
 
 

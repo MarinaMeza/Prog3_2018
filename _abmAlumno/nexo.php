@@ -9,12 +9,21 @@
     
 
     if (isset($_POST['queHago'])) {
-        $queHago = isset($_POST['queHago']);
+        $queHago = $_POST['queHago'];
+        
         switch ($queHago) {
-            case 'saludo':
-                echo "Hola post";
+            case 'alta':
+                echo "Hola alta";
+                $alumno = new Alumno($_POST['nombre'], $_POST['legajo'], $_FILES['foto']['name']);
+                $alumno->Guardar();
                 break;
-            
+            case 'baja':
+            echo "Hola baja";
+                Alumno::holaAlumno();
+                break;
+            case 'modificacion':
+                echo "Hola modificacion";
+                break;
             default:
                 # code...
                 break;
@@ -22,7 +31,7 @@
     }else if(isset($_GET['queHago'])) {
         $queHago = isset($_GET['queHago']);
         switch ($queHago) {
-            case 'saludo':
+            case 'listar':
                 echo "Hola get";
                 break;
             
