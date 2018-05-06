@@ -13,7 +13,6 @@
         
         switch ($queHago) {
             case 'alta':
-                echo "Hola alta";
                 $alumno = new Alumno($_POST['nombre'], $_POST['legajo'], $_FILES['foto']['name']);
                 $alumno->Guardar();
                 break;
