@@ -15,7 +15,9 @@ class Usuario {
     }
 
 
-    
+    public function ToString () {
+        return $this->nombre."__".$this->email."__".$this->perfil."__".$this->edad."__".$this->clave."\r\n";
+    }
 }
 
 ?>
