@@ -7,4 +7,5 @@
     
     $archivo = fopen('usuarios.txt','a');
     fwrite($archivo, $usuario->ToString());
+    fclose($archivo);
 ?>
