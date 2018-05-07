@@ -4,7 +4,7 @@
 
     $listaComentarios = Comentario::TraerTodos();
     $listaUsuarios = Usuario::TraerTodos();
-
+    $flag = 0;
     $tabla = "<table style='border: 1px solid black'> 
                 
                     <tr>
@@ -15,16 +15,17 @@
                     </tr>
                 ";
 
-    $email = isset($_POST['email']) ? $_POST['email'] : NULL;
-    $titulo = isset($_POST['titulo']) ? $_POST['titulo'] : NULL;
-    
+    $email = isset($_GET['email']) ? $_GET['email'] : NULL;
+    $titulo = isset($_GET['titulo']) ? $_GET['titulo'] : NULL;
+    /*
     var_dump($listaComentarios);
     echo "<br>--------<br>";
-    var_dump($listaUsuarios);
+    var_dump($listaUsuarios);*/
     //echo '<img src="ImagenesDeComentario/Saludos.jpg" alt="noseque">';
-    //ARREGLAR QUE SOLO FUNCIONA CON EMAIL
+    
     foreach ($listaComentarios as $comentario) {
         if ($email == $comentario[0] || $titulo == $comentario[1]) {
+            $flag = 1;
             //$tabla .= "<br>".$comentario[1]."<br>";
             $tabla .= '<td><img src="'.$comentario[1].'.jpg" width="150" alt="'.$comentario[1].'.jpg"></td>
                        <td>'.$comentario[1].'</td>';
@@ -37,6 +38,7 @@
                             </tr>';
                 }
             }
+            $tabla .= "</tr>";
         }
     }/*
     foreach ($listaComentarios as $comentario) {
@@ -73,6 +75,8 @@
                                 <td>1</td></tr>';
                 }
     $tabla.='</table>';*/
-
+    if ($flag == 0) {
+        $tabla = "No se han ingresado valores para la busqueda";
+    }
     echo $tabla;
 ?>
