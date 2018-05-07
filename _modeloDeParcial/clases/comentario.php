@@ -23,14 +23,14 @@ class Comentario {
         $this->comentario = $pComentario;
     }
 
-    public function getFoto(){
-        return $this->foto;
-    }
-
     public function __construct2 ($pEmail, $pTitulo, $pComentario, $pFoto) {
         self::__construct1($pEmail, $pTitulo, $pComentario);
         $extension = pathinfo($pFoto, PATHINFO_EXTENSION);
         $this->foto = "ImagenesDeComentario/".$pTitulo.".".$extension;
+    }
+    
+    public function getFoto(){
+        return $this->foto;
     }
 
     public static function AltaComentario($pComentario) {
