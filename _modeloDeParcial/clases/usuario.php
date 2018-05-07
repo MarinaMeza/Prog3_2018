@@ -32,7 +32,7 @@ class Usuario {
 
 
     public function ToString () {
-        return $this->nombre."__".$this->email."__".$this->perfil."__".$this->edad."__".$this->clave."\r\n";
+        return $this->nombre."__".$this->email."__".$this->perfil."__".$this->edad."__".$this->clave."__".$this->foto."\r\n";
     }
 }
 

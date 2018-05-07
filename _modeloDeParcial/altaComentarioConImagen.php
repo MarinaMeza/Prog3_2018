@@ -15,12 +15,11 @@
 
 
     $extension = pathinfo($comentario->foto, PATHINFO_EXTENSION);
-        if($comentario->foto != "") {
-            if ($extension != 'jpg') {
-                echo "<br>Error guardando la foto<br>";
-            }else {
-                $ubicacion = "ImagenesDeComentario/".$comentario->titulo.".".$extension;
-                move_uploaded_file($_FILES['foto']['tmp_name'],$ubicacion);
-            }
+    if($comentario->foto != "") {
+        if ($extension != 'jpg') {
+            echo "<br>Error guardando la foto<br>";
+        }else {
+            move_uploaded_file($_FILES['foto']['tmp_name'],$comentario->foto);
         }
+    }
 ?>

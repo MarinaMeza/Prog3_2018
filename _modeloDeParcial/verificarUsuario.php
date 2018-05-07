@@ -6,12 +6,12 @@
 
     $listaUsuarios = Usuario::TraerTodos();
 
-    //var_dump($listaUsuarios);
+    var_dump($listaUsuarios);
     $respuesta = 'El usuario no existe';
 
     foreach ($listaUsuarios as $usuario) {
         if ($email == $usuario[1]) {
-            if ($clave==$usuario[3]) {
+            if ($clave==trim($usuario[4])) {
                 $respuesta = "Bienvenido";
                 break;
             } else {

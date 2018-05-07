@@ -23,11 +23,31 @@ class Comentario {
         $this->comentario = $pComentario;
     }
 
-    public function __construct2 ($pEmail, $pTitulo, $pComentario, $pFoto) {
-        self::__construct1($pEmail, $pTitulo, $pComentario);
-        $this->foto = $pFoto;
+    public function getFoto(){
+        return $this->foto;
     }
 
+    public function __construct2 ($pEmail, $pTitulo, $pComentario, $pFoto) {
+        self::__construct1($pEmail, $pTitulo, $pComentario);
+        $extension = pathinfo($pFoto, PATHINFO_EXTENSION);
+        $this->foto = "ImagenesDeComentario/".$pTitulo.".".$extension;
+    }
+
+    public static function TraerTodos() {
+        $listaComentarios = array();
+        $archivo = fopen('comentario.txt','r');
+        while(!feof($archivo)) {
+            $linea = fgets($archivo);
+            $comentarios = explode('__',$linea);
+            $comentarios[0] = trim($comentarios[0]);
+            if ($comentarios[0] != '') {
+                $listaComentarios[] = $comentarios;
+            }
+        }
+        fclose($archivo);
+        
+        return $listaComentarios;
+    }
 
     public function ToString () {
         return $this->email."__".$this->titulo."__".$this->comentario."\r\n";
