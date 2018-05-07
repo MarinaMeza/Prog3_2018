@@ -43,6 +43,27 @@ class Helado {
         }
         return $retorno;
     }
+/*
+    public static function ModificarStock($pId, $pVenta) {
+        $retorno = FALSE;
+        //$archivo = fopen('Helados.txt', 'r');
+        $listaHelados = self::TraerTodos();
+
+        for ($i=0; $i < count($listaHelados); $i++) { 
+            if ($listaHelados[$i][0] == $pId) {
+                $retorno = TRUE;
+                
+                $nuevoStock = $listaHelados[$i][4] - $pVenta;
+                $auxHelado = $listaHelados[$i][0].'__'.$listaHelados[$i][1].'__'.$listaHelados[$i][2].'__'.$listaHelados[$i][3].'__'.$listaHelados[$i][4].'\r\n';
+                $nuevoHelado = $listaHelados[$i][0].'__'.$listaHelados[$i][1].'__'.$listaHelados[$i][2].'__'.$listaHelados[$i][3].'__'.$nuevoStock.'\r\n';
+                /*echo "<br>auxhelado".$auxHelado;
+                echo "<br>nuevohelado".$nuevoHelado;
+                file_put_contents('Helados.txt', str_replace($auxHelado, $nuevoHelado, file_get_contents('Helados.txt')));
+            }
+        }
+        //fclose($archivo);
+        return $retorno;
+    }*/
 
     public static function TraerTodos() {
         $listaHelado = array();
