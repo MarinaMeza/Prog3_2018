@@ -89,6 +89,7 @@ class Usuario {
             //echo "<br>lista".$listaUsuarios[$i][1]."<br>";
                 //echo "<br>pusuario".$pUsuario->email."<br>";
             if ($listaUsuarios[$i][1] == $pUsuario->email) {
+                $retorno = TRUE;
                 echo "<br>lista".$listaUsuarios[$i][0]."<br>";
                 echo "<br>pusuario".$pUsuario->ToString()."<br>";
                 echo "<br>fileget".file_get_contents('usuarios.txt')."<br>";
@@ -107,6 +108,14 @@ class Usuario {
         
         echo "<br>----------------------------------<br>";
         var_dump ($listaUsuarios);
+        return $retorno;
+    }
+    
+    public static function UsuarioModificacionValidado($pUsuario) {
+        $retorno = FALSE;
+        if ($pUsuario->perfil) {
+            # code...
+        }
         return $retorno;
     }
 

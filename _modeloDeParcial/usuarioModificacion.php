@@ -11,9 +11,9 @@
     var_dump($usuario);
     echo "<br>----------------------------------<br>";*/
     if (Usuario::UsuarioModificacion($usuario)) {
-        $respuesta = "Se creó el usuario exitosamente";
+        $respuesta = "Se modificó el usuario exitosamente";
     }else {
-        $respuesta = "Error al creat el usuario";
+        $respuesta = "Error al modificar el usuario";
     }
 
     echo $respuesta;
