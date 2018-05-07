@@ -2,27 +2,17 @@
     require_once "clases/usuario.php";
     require_once "clases/comentario.php";
 
-    if (isset($_FILES['foto']['name'])) {
-        $comentario = new Comentario($_POST['email'], $_POST['titulo'], $_POST['comentario'], $_FILES['foto']['name']);
-    }else {
-        $comentario = new Comentario($_POST['email'], $_POST['titulo'], $_POST['comentario']);
-    }
-    
+    $comentario = new Comentario($_POST['email'], $_POST['titulo'], $_POST['comentario']);
+
+    $respuesta = '';
+
     //var_dump($comentario);
-    $listaUsuarios = Usuario::TraerTodos();
-    $retorno = 0;
-    $archivo = fopen('comentario.txt','a');
-
     
-    foreach ($listaUsuarios as $usuario) {
-        if ($comentario->email == $usuario[1]) {
-            $retorno = 1;
-            break;
-        }
+    if (Comentario::AltaComentario($comentario)) {
+        $respuesta = "Se subió el comentario";
+    }else {
+        $respuesta = "Error al subir el comentario";
     }
 
-    if ($retorno == 1) {
-        fwrite($archivo, $comentario->ToString());
-    }
-    fclose($archivo);
+    echo $respuesta;
 ?>

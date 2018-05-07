@@ -1,25 +1,22 @@
 <?php
-    require_once 'altaComentario.php';
-
+    require_once "clases/usuario.php";
+    require_once "clases/comentario.php";
+    
     if(!file_exists('ImagenesDeComentario')) {
         mkdir('ImagenesDeComentario', 0777, true);
     }
-    var_dump($comentario);
+    
+    $comentario = new Comentario($_POST['email'], $_POST['titulo'], $_POST['comentario'], $_FILES['foto']['name']);
+    
+    $respuesta = '';
 
-    if($retorno == 1) {
-        echo "holaaaa";
-    } else {
-        echo "NOPOOOOOOOOOOOOOO";
+    //var_dump($comentario);
+    
+    if (Comentario::AltaComentarioConImagen($comentario)) {
+        $respuesta = "Se subió el comentario";
+    }else {
+        $respuesta = "Error al subir el comentario";
     }
 
-
-
-    $extension = pathinfo($comentario->foto, PATHINFO_EXTENSION);
-    if($comentario->foto != "") {
-        if ($extension != 'jpg') {
-            echo "<br>Error guardando la foto<br>";
-        }else {
-            move_uploaded_file($_FILES['foto']['tmp_name'],$comentario->foto);
-        }
-    }
+    echo $respuesta;
 ?>
