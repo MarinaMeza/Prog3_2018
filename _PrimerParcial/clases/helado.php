@@ -65,6 +65,39 @@ class Helado {
         return $retorno;
     }*/
 
+    public static function HeladoModificacion($pHelado) {
+        $retorno = FALSE;
+        $listaHelados = self::TraerTodos();
+        //echo "<br>---------------lista-------------------<br>";
+        //var_dump ($listaHelados);
+        $fecha = date('Y-m-d');
+        
+        for ($i=0; $i < count($listaHelados); $i++) { 
+            $auxId = $pHelado->sabor.$pHelado->tipo;
+            if ($listaHelados[$i][0] == $pHelado->id) {
+                $retorno = TRUE;
+                $auxHelado = $listaHelados[$i][0]."__".$listaHelados[$i][1]."__".$listaHelados[$i][2]."__".$listaHelados[$i][3]."__".$listaHelados[$i][4];
+                
+                echo $auxHelado;
+                file_put_contents('Helados.txt', str_replace($auxHelado, $pHelado->ToString(), file_get_contents('Helados.txt')));
+                
+                if (file_exists('ImagenesDeHelado/'.$pHelado->id.'.jpg')) {
+                    rename('ImagenesDeHelado/'.$pHelado->id.'.jpg', 'backup/'.$pHelado->id.'-'.$fecha.'.jpg');
+                }
+                
+                move_uploaded_file($_FILES['foto']['tmp_name'], 'ImagenesDeHelado/'.$pHelado->id.'.jpg');
+            }
+        }
+        if(!file_exists('backup')) {
+            mkdir('backup', 0777, true);
+        }
+        //rename('Helados.txt', 'backup/helados'.$fecha.'.txt') ;
+        
+        //echo "<br>----------------------------------<br>";
+        //var_dump ($listaHelados);
+        return $retorno;
+    }
+
     public static function TraerTodos() {
         $listaHelado = array();
         
