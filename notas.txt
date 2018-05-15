@@ -1,0 +1,2 @@
+PDO
+Pasar el parcial para que funcione con base de datos-pdo
