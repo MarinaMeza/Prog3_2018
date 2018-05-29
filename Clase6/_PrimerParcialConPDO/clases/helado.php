@@ -144,7 +144,7 @@ class Helado {
         //var_dump ($listaHelados);
         return $retorno;
     }
-
+/*
     public static function TraerTodos() {
         $listaHelado = array();
         
@@ -160,7 +160,7 @@ class Helado {
         fclose($archivo);
         
         return $listaHelado;
-    }    
+    }    */
 
     public function ToString () {
         return $this->id."__".$this->sabor."__".$this->precio."__".$this->tipo."__".$this->cantidad."\r\n";
