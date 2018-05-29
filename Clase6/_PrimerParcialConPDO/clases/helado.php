@@ -14,7 +14,7 @@ class Helado {
                 self::__construct0();
                 break;
             case 4:
-                self::__construct2($argv[0], $argv[1], $argv[2], $argv[3], $argv[4]);
+                self::__construct1($argv[0], $argv[1], $argv[2], $argv[3]);
                 break;
         }
     }

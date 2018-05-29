@@ -10,11 +10,11 @@
     //$retorno = "Si hay";
     $retorno = "No hay tipo ".$tipo."<br>";
     
+    
     foreach ($todosLosHelados as $helado) {
         if ($helado->sabor == $sabor && $helado->tipo == $tipo) {
             $retorno = "Si hay";
             break;
-            //$retorno = "No hay tipo ".$tipo."<br>";
         }else if ($helado->sabor != $sabor && $helado->tipo == $tipo) {
             $retorno = "No hay sabor ".$sabor."<br>";
             break;
