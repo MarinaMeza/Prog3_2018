@@ -7,6 +7,7 @@
 
     $todosLosClientes = Cliente::TraerTodosBD();
     $retorno = '';
+    $flag = FALSE;
 
     foreach ($todosLosClientes as $cliente) {
         if ($cliente->nacionalidad == $nacionalidad && $cliente->sexo == $sexo) {
@@ -19,7 +20,18 @@
             }
             $retorno .= "Edad: ".$cliente->edad."<br>";
             $retorno .= "<br>";
+            $flag = TRUE;
         }
     }
+
+    if (!$flag) {
+        $retorno = "No hay clientes de sexo: ".$sexo."<br>";
+        if ($cliente->nacionalidad != $nacionalidad && $cliente->sexo == $sexo) {
+            $retorno = "No hay clientes de nacionalidad: ".$nacionalidad."<br>";
+        }else if ($cliente->nacionalidad != $nacionalidad){
+            $retorno .= "No hay clientes de nacionalidad: ".$nacionalidad."<br>";
+        }
+    }
+
     echo $retorno;
 ?>
