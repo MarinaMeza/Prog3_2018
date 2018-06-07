@@ -1,0 +1,7 @@
+base de datos: test
+tabla llamada tabla
+valor_char
+valor_date
+valor_int
+
+ 
