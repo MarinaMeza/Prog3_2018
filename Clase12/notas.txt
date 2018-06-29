@@ -1,0 +1,30 @@
+Modelo de parcial
+Primera parte
+don julian
+-medias-
+id
+color
+marca
+precio
+talle
+foto
+
+-usuario-
+id
+nombre
+clave
+
+1 - post alta media (sin token)
+2 - get listado (sin token)
+3 - post alta usuario (sin token)
+4 - login retorna token
+5 - get listado (solo con token)
+
+Segunda parte
+
+-------------------------------------------------
+Segundo parcial
+abm con apirest y token (con postman)
+
+hay que usar bindvalue (para que no lo tome como parte consulta)
+el final tiene que estar documentado (api doc?)???
