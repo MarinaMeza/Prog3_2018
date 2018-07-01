@@ -14,7 +14,7 @@ class Helado {
                 self::__construct0();
                 break;
             case 4:
-                self::__construct2($argv[0], $argv[1], $argv[2], $argv[3], $argv[4]);
+                self::__construct1($argv[0], $argv[1], $argv[2], $argv[3]);
                 break;
         }
     }
@@ -144,7 +144,7 @@ class Helado {
         //var_dump ($listaHelados);
         return $retorno;
     }
-
+/*
     public static function TraerTodos() {
         $listaHelado = array();
         
@@ -160,7 +160,7 @@ class Helado {
         fclose($archivo);
         
         return $listaHelado;
-    }    
+    }    */
 
     public function ToString () {
         return $this->id."__".$this->sabor."__".$this->precio."__".$this->tipo."__".$this->cantidad."\r\n";
