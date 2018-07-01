@@ -1,0 +1,213 @@
+{
+	"info": {
+		"_postman_id": "c57056fc-a449-490d-9430-443b048f4415",
+		"name": "medias",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "alta media",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "color",
+							"value": "negras",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "marca",
+							"value": "mediasOTRAMarca",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "precio",
+							"value": "43",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "talle",
+							"value": "35",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8080/Prog3_2018/Clase12/prueba/index.php/media/",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Prog3_2018",
+						"Clase12",
+						"prueba",
+						"index.php",
+						"media",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "traer todas las medias",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "localhost:8080/Prog3_2018/Clase12/prueba/index.php/media/",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Prog3_2018",
+						"Clase12",
+						"prueba",
+						"index.php",
+						"media",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "traer una media",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "localhost:8080/Prog3_2018/Clase12/prueba/index.php/media/3",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Prog3_2018",
+						"Clase12",
+						"prueba",
+						"index.php",
+						"media",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "borrar una media",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "id",
+							"value": "4",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8080/Prog3_2018/Clase12/prueba/index.php/media/",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Prog3_2018",
+						"Clase12",
+						"prueba",
+						"index.php",
+						"media",
+						""
+					]
+				},
+				"description": "usar body->x-www..."
+			},
+			"response": []
+		},
+		{
+			"name": "modificar una media",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "id",
+							"value": "6",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "color",
+							"value": "negro",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "marca",
+							"value": "mediasOTRAMarca",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "precio",
+							"value": "32",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "talle",
+							"value": "41",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8080/Prog3_2018/Clase12/prueba/index.php/media/",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Prog3_2018",
+						"Clase12",
+						"prueba",
+						"index.php",
+						"media",
+						""
+					]
+				},
+				"description": "usar body->x-www..."
+			},
+			"response": []
+		}
+	]
+}

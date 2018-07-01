@@ -3,12 +3,12 @@ use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
 
 
-require '../composer/vendor/autoload.php';
-require_once '/clases/AccesoDatos.php';
-require_once '/clases/cdApi.php';
-require_once '/clases/AutentificadorJWT.php';
-require_once '/clases/MWparaCORS.php';
-require_once '/clases/MWparaAutentificar.php';
+require __DIR__.'/vendor/autoload.php';
+require_once './clases/AccesoDatos.php';
+require_once './clases/mediaApi.php';
+require_once './clases/AutentificadorJWT.php';
+require_once './clases/MWparaCORS.php';
+require_once './clases/MWparaAutentificar.php';
 
 $config['displayErrorDetails'] = true;
 $config['addContentLengthHeader'] = false;
@@ -30,19 +30,19 @@ $app = new \Slim\App(["settings" => $config]);
 
 
 /*LLAMADA A METODOS DE INSTANCIA DE UNA CLASE*/
-$app->group('/cd', function () {
+$app->group('/media', function () {
  
-  $this->get('/', \cdApi::class . ':traerTodos')->add(\MWparaCORS::class . ':HabilitarCORSTodos');
+  $this->get('/', \mediaApi::class . ':traerTodos')->add(\MWparaCORS::class . ':HabilitarCORSTodos');
  
-  $this->get('/{id}', \cdApi::class . ':traerUno')->add(\MWparaCORS::class . ':HabilitarCORSTodos');
+  $this->get('/{id}', \mediaApi::class . ':traerUno')->add(\MWparaCORS::class . ':HabilitarCORSTodos');
 
-  $this->post('/', \cdApi::class . ':CargarUno');
+  $this->post('/', \mediaApi::class . ':CargarUno');
 
-  $this->delete('/', \cdApi::class . ':BorrarUno');
+  $this->delete('/', \mediaApi::class . ':BorrarUno');
 
-  $this->put('/', \cdApi::class . ':ModificarUno');
+  $this->put('/', \mediaApi::class . ':ModificarUno');
      
-})->add(\MWparaAutentificar::class . ':VerificarUsuario')->add(\MWparaCORS::class . ':HabilitarCORS8080');
+})/*->add(\MWparaAutentificar::class . ':VerificarUsuario')*/->add(\MWparaCORS::class . ':HabilitarCORS8080');
 
 
 
