@@ -7,14 +7,15 @@ class usuarioApi extends Usuario implements IApiUsable{
     public function CargarUno($request, $response, $args) {
         $objDelaRespuesta= new stdclass();
         
-        $ArrayDeParatros = $request->getParsedBody();
-        //var_dump($ArrayDeParametros);
+        $ArrayDeParametros = $request->getParsedBody();
+        var_dump($ArrayDeParametros);
         $nombre= $ArrayDeParametros['nombre'];
         $clave= $ArrayDeParametros['clave'];
-        
+        $perfil= $ArrayDeParametros['perfil'];
         $miUsuario = new Usuario();
         $miUsuario->nombre = $nombre;
         $miUsuario->clave = $clave;
+        $miUsuario->perfil = $perfil;
         $miUsuario->InsertarUsuarioParametros();
         $archivos = $request->getUploadedFiles();/*
         if(!file_exists('fotos')) {

@@ -54,7 +54,18 @@ class mediaApi extends Media implements IApiUsable{
     
     public function TraerTodos($request, $response, $args) {
         $todasLasMedias=Media::TraerTodasLasMedias();
-        $newresponse = $response->withJson($todasLasMedias, 200);  
+        $newresponse = $response->withJson($todasLasMediasAux, 200);  
+        return $newresponse;
+    }
+
+    public function TraerTodosFiltrado($request, $response, $args) {
+        $todasLasMedias=Media::TraerTodasLasMedias();
+        $todasLasMediasAux = array();
+        foreach ($todasLasMedias as $media) {
+            $aux = (object) array_filter((array) $media);
+            array_push($todasLasMediasAux,$aux);
+        }
+        $newresponse = $response->withJson($todasLasMediasAux, 200);  
         return $newresponse;
     }
 

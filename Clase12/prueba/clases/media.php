@@ -22,7 +22,8 @@ class Media{
     
   	public static function TraerTodasLasMedias() {
         $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
-        $consulta =$objetoAccesoDato->RetornarConsulta("select id,color,marca,precio,talle from medias");
+        //$consulta =$objetoAccesoDato->RetornarConsulta("select id,color,marca,precio,talle from medias");
+        $consulta =$objetoAccesoDato->RetornarConsulta("select color,marca,talle from medias");
         $consulta->execute();			
         return $consulta->fetchAll(PDO::FETCH_CLASS, "Media");		
     }

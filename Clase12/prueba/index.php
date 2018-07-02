@@ -6,6 +6,7 @@ use \Psr\Http\Message\ResponseInterface as Response;
 require __DIR__.'/vendor/autoload.php';
 require_once './clases/AccesoDatos.php';
 require_once './clases/mediaApi.php';
+require_once './clases/UsuarioApi.php';
 require_once './clases/AutentificadorJWT.php';
 require_once './clases/MWparaCORS.php';
 require_once './clases/MWparaAutentificar.php';
@@ -33,17 +34,31 @@ $app = new \Slim\App(["settings" => $config]);
 $app->group('/media', function () {
  
   $this->get('/', \mediaApi::class . ':traerTodos')->add(\MWparaCORS::class . ':HabilitarCORSTodos');
+
+  $this->get('/F', \mediaApi::class . ':traerTodosFiltrado')->add(\MWparaCORS::class . ':HabilitarCORSTodos');
  
   $this->get('/{id}', \mediaApi::class . ':traerUno')->add(\MWparaCORS::class . ':HabilitarCORSTodos');
 
   $this->post('/', \mediaApi::class . ':CargarUno');
 
-  $this->delete('/', \mediaApi::class . ':BorrarUno');
+  $this->delete('/', \mediaApi::class . ':BorrarUno')->add(\MWparaAutentificar::class . ':VerificarUsuario');
 
   $this->put('/', \mediaApi::class . ':ModificarUno');
      
-})/*->add(\MWparaAutentificar::class . ':VerificarUsuario')*/->add(\MWparaCORS::class . ':HabilitarCORS8080');
+})->add(\MWparaCORS::class . ':HabilitarCORS8080');
 
+$app->group('/usuario', function () {
+ 
+  $this->get('/', \usuarioApi::class . ':traerTodos')->add(\MWparaCORS::class . ':HabilitarCORSTodos');
+ 
+  $this->get('/{id}', \usuarioApi::class . ':traerUno')->add(\MWparaCORS::class . ':HabilitarCORSTodos');
 
+  $this->post('/', \usuarioApi::class . ':CargarUno');
+
+  $this->delete('/', \usuarioApi::class . ':BorrarUno');
+
+  $this->put('/', \usuarioApi::class . ':ModificarUno');
+     
+})->add(\MWparaAutentificar::class . ':VerificarUsuario')->add(\MWparaCORS::class . ':HabilitarCORS8080');
 
 $app->run();
