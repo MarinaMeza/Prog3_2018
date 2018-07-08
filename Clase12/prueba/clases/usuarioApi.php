@@ -8,7 +8,7 @@ class usuarioApi extends Usuario implements IApiUsable{
         $objDelaRespuesta= new stdclass();
         
         $ArrayDeParametros = $request->getParsedBody();
-        var_dump($ArrayDeParametros);
+        //var_dump($ArrayDeParametros);
         $nombre= $ArrayDeParametros['nombre'];
         $clave= $ArrayDeParametros['clave'];
         $perfil= $ArrayDeParametros['perfil'];
@@ -37,8 +37,11 @@ class usuarioApi extends Usuario implements IApiUsable{
     }
 
     public function TraerUno($request, $response, $args) {
-        $id=$args['id'];
-        $elUsuario=Usuario::TraerUnaUsuario($id);
+        /*$nombre=$args['nombre'];
+        $clave=$args['clave'];
+        $perfil=$args['perfil'];*/
+        $elUsuario=Usuario::TraerUnUsuario($request);
+        //var_dump($elUsuario);
         if(!$elUsuario) {
             $objDelaRespuesta= new stdclass();
             $objDelaRespuesta->error="No esta el Usuario";
@@ -46,6 +49,7 @@ class usuarioApi extends Usuario implements IApiUsable{
         } else {
             $NuevaRespuesta = $response->withJson($elUsuario, 200); 
         }     
+        var_dump($NuevaRespuesta);
         return $NuevaRespuesta;
     }
     
@@ -90,5 +94,18 @@ class usuarioApi extends Usuario implements IApiUsable{
         return $response->withJson($objDelaRespuesta, 200);
    }
 
+   public function CrearToken($request, $response, $args) {
+        $ArrayDeParametros = $request->getParsedBody();
+        $nombre= $ArrayDeParametros['nombre'];
+        $clave= $ArrayDeParametros['clave'];
+        $perfil= $ArrayDeParametros['perfil'];
+        //var_dump($ArrayDeParametros);
+        $miUsuario = new Usuario();
+        $resultado = $miUsuario->TraerUnUsuario($nombre, $clave, $perfil);
+        $data = array('nombre' => $nombre, 'perfil' => $perfil);
+        $token = AutentificadorJWT::CrearToken($data);
+        $newResponse = $response->withJson($token, 200);
+        return $newResponse;
+   }
 }
 ?>

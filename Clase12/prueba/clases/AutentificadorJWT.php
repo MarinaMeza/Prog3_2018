@@ -21,7 +21,7 @@ class AutentificadorJWT
             'exp' => $ahora + (60*60),
             'aud' => self::Aud(),
             'data' => $datos,
-            'app'=> "API REST CD 2017"
+            'app'=> "API REST MEDIAS 2018"
         );
      
         return JWT::encode($payload, self::$claveSecreta);

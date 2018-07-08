@@ -15,12 +15,20 @@ class Media{
         $consulta->bindValue(':marca', $this->marca, PDO::PARAM_STR);
         $consulta->bindValue(':precio', $this->precio, PDO::PARAM_STR);
         $consulta->bindValue(':talle', $this->talle, PDO::PARAM_INT);
+        
         $consulta->execute();
         return $objetoAccesoDato->RetornarUltimoIdInsertado();
     }
 
     
   	public static function TraerTodasLasMedias() {
+        $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
+        $consulta =$objetoAccesoDato->RetornarConsulta("select id,color,marca,precio,talle from medias");
+        $consulta->execute();			
+        return $consulta->fetchAll(PDO::FETCH_CLASS, "Media");		
+    }
+
+    public static function TraerTodasLasMediasFiltrado() {
         $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
         //$consulta =$objetoAccesoDato->RetornarConsulta("select id,color,marca,precio,talle from medias");
         $consulta =$objetoAccesoDato->RetornarConsulta("select color,marca,talle from medias");

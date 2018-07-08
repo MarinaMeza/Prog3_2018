@@ -19,7 +19,7 @@ class mediaApi extends Media implements IApiUsable{
         $miMedia->marca = $marca;
         $miMedia->precio = $precio;
         $miMedia->talle = $talle;
-        $miMedia->InsertarMediaParametros();
+        
         $archivos = $request->getUploadedFiles();
         if(!file_exists('fotos')) {
             mkdir('fotos', 0777, true);
@@ -29,11 +29,13 @@ class mediaApi extends Media implements IApiUsable{
         //var_dump($archivos['foto']);
         if(isset($archivos['foto'])){
             $nombreAnterior=$archivos['foto']->getClientFilename();
-            $extension= explode(".", $nombreAnterior)  ;
+            $extension= explode(".", $nombreAnterior);
             //var_dump($nombreAnterior);
             $extension=array_reverse($extension);
             $archivos['foto']->moveTo($destino.$marca.$color.".".$extension[0]);
+            $miMedia->foto = $destino.$marca.$color.".".$extension[0];
         }
+        $miMedia->InsertarMediaParametros();
         //$response->getBody()->write("se guardo el cd");
         $objDelaRespuesta->respuesta = "Se guardó la media.";   
         return $response->withJson($objDelaRespuesta, 200);
@@ -54,12 +56,12 @@ class mediaApi extends Media implements IApiUsable{
     
     public function TraerTodos($request, $response, $args) {
         $todasLasMedias=Media::TraerTodasLasMedias();
-        $newresponse = $response->withJson($todasLasMediasAux, 200);  
+        $newresponse = $response->withJson($todasLasMedias, 200);  
         return $newresponse;
     }
 
     public function TraerTodosFiltrado($request, $response, $args) {
-        $todasLasMedias=Media::TraerTodasLasMedias();
+        $todasLasMedias=Media::TraerTodasLasMedias-filtrado();
         $todasLasMediasAux = array();
         foreach ($todasLasMedias as $media) {
             $aux = (object) array_filter((array) $media);
@@ -83,7 +85,7 @@ class mediaApi extends Media implements IApiUsable{
         } else {
             $objDelaRespuesta->resultado="no Borro nada!!!<br>".$ArrayDeParametros;
         }
-        $newResponse = $response->withJson($objDelaRespuesta, 200);  
+        $newResponse = $response->withJson($objDelaRespuesta, 200);
         return $newResponse;
    }
     
@@ -97,7 +99,7 @@ class mediaApi extends Media implements IApiUsable{
         $miMedia->marca=$ArrayDeParametros['marca'];
         $miMedia->precio=$ArrayDeParametros['precio'];
         $miMedia->talle=$ArrayDeParametros['talle'];
-
+        $miMedia->talle=$ArrayDeParametros['foto'];
         $resultado =$miMedia->ModificarMediaParametros();
         $objDelaRespuesta= new stdclass();
         //var_dump($resultado);
