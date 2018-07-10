@@ -61,7 +61,7 @@ class mediaApi extends Media implements IApiUsable{
     }
 
     public function TraerTodosFiltrado($request, $response, $args) {
-        $todasLasMedias=Media::TraerTodasLasMedias-filtrado();
+        $todasLasMedias=Media::TraerTodasLasMediasFiltrado();
         $todasLasMediasAux = array();
         foreach ($todasLasMedias as $media) {
             $aux = (object) array_filter((array) $media);
@@ -99,7 +99,7 @@ class mediaApi extends Media implements IApiUsable{
         $miMedia->marca=$ArrayDeParametros['marca'];
         $miMedia->precio=$ArrayDeParametros['precio'];
         $miMedia->talle=$ArrayDeParametros['talle'];
-        $miMedia->talle=$ArrayDeParametros['foto'];
+        $miMedia->foto=$ArrayDeParametros['foto'];
         $resultado =$miMedia->ModificarMediaParametros();
         $objDelaRespuesta= new stdclass();
         //var_dump($resultado);

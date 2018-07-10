@@ -102,9 +102,14 @@ class usuarioApi extends Usuario implements IApiUsable{
         //var_dump($ArrayDeParametros);
         $miUsuario = new Usuario();
         $resultado = $miUsuario->TraerUnUsuario($nombre, $clave, $perfil);
-        $data = array('nombre' => $nombre, 'perfil' => $perfil);
-        $token = AutentificadorJWT::CrearToken($data);
-        $newResponse = $response->withJson($token, 200);
+        //var_dump($resultado);
+        if (!$resultado) {
+            $newResponse = "Los datos ingresados son incorrectos";
+        } else {
+            $data = array('nombre' => $nombre, 'perfil' => $perfil);
+            $token = AutentificadorJWT::CrearToken($data);
+            $newResponse = $response->withJson($token, 200);
+        }
         return $newResponse;
    }
 }

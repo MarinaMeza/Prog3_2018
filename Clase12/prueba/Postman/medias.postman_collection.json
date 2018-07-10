@@ -1,0 +1,524 @@
+{
+	"info": {
+		"_postman_id": "c57056fc-a449-490d-9430-443b048f4415",
+		"name": "medias",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "alta media",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "color",
+							"value": "negro",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "marca",
+							"value": "mediasUnaMarca",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "precio",
+							"value": "66",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "talle",
+							"value": "33",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "foto",
+							"description": "",
+							"type": "file"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8080/Prog3_2018/Clase12/prueba/index.php/media/",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Prog3_2018",
+						"Clase12",
+						"prueba",
+						"index.php",
+						"media",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "traer todas las medias",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "localhost:8080/Prog3_2018/Clase12/prueba/index.php/media/",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Prog3_2018",
+						"Clase12",
+						"prueba",
+						"index.php",
+						"media",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "traer todas las mediasfiltrado",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "localhost:8080/Prog3_2018/Clase12/prueba/index.php/media/F",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Prog3_2018",
+						"Clase12",
+						"prueba",
+						"index.php",
+						"media",
+						"F"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "traer una media",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "localhost:8080/Prog3_2018/Clase12/prueba/index.php/media/11",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Prog3_2018",
+						"Clase12",
+						"prueba",
+						"index.php",
+						"media",
+						"11"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "borrar una media",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "token",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1MzEwOTc0MzQsImV4cCI6MTUzMTA5NzU1NCwiYXVkIjoiMzYzOTQ4Yjc1NDc3MWQ4MjM2ODlkZmM3OWU0OTUyZTc3N2ZjM2Q2MSIsImRhdGEiOnsibm9tYnJlIjoiZHVlXHUwMGYxbyIsInBlcmZpbCI6ImR1ZVx1MDBmMW8ifSwiYXBwIjoiQVBJIFJFU1QgTUVESUFTIDIwMTgifQ.M-hZQMxPmOcwW8DRpFox6RLLJ23Xmz6zsk6NICDw124"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "id",
+							"value": "5",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8080/Prog3_2018/Clase12/prueba/index.php/media/",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Prog3_2018",
+						"Clase12",
+						"prueba",
+						"index.php",
+						"media",
+						""
+					]
+				},
+				"description": "usar body->x-www..."
+			},
+			"response": []
+		},
+		{
+			"name": "modificar una media",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "id",
+							"value": "6",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "color",
+							"value": "negro",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "marca",
+							"value": "mediasOTRAMarca",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "precio",
+							"value": "32",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "talle",
+							"value": "41",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8080/Prog3_2018/Clase12/prueba/index.php/media/",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Prog3_2018",
+						"Clase12",
+						"prueba",
+						"index.php",
+						"media",
+						""
+					]
+				},
+				"description": "usar body->x-www..."
+			},
+			"response": []
+		},
+		{
+			"name": "alta usuario",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "nombre",
+							"value": "dueño",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "clave",
+							"value": "dueño",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "perfil",
+							"value": "dueño",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8080/Prog3_2018/Clase12/prueba/index.php/usuario/",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Prog3_2018",
+						"Clase12",
+						"prueba",
+						"index.php",
+						"usuario",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login usuario",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "nombre",
+							"value": "encargado",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "clave",
+							"value": "encargado",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "perfil",
+							"value": "encargado",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8080/Prog3_2018/Clase12/prueba/index.php/usuario/login",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Prog3_2018",
+						"Clase12",
+						"prueba",
+						"index.php",
+						"usuario",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "traer todos los usuarios",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1MzExNjIzNTYsImV4cCI6MTUzMTE2MjQ3NiwiYXVkIjoiMzYzOTQ4Yjc1NDc3MWQ4MjM2ODlkZmM3OWU0OTUyZTc3N2ZjM2Q2MSIsImRhdGEiOnsibm9tYnJlIjoiZHVlXHUwMGYxbyIsInBlcmZpbCI6ImR1ZVx1MDBmMW8ifSwiYXBwIjoiQVBJIFJFU1QgTUVESUFTIDIwMTgifQ.BbhaaDsAGGc753reSXmjDsNUfNVJ6Y6QqA2QXYT794Q"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "nombre",
+							"value": "teeeeeeee",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "clave",
+							"value": "taaaaaaaa",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "perfil",
+							"value": "tiiiiiiiiiiiiiiiii",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8080/Prog3_2018/Clase12/prueba/index.php/usuario/",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Prog3_2018",
+						"Clase12",
+						"prueba",
+						"index.php",
+						"usuario",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "alta venta",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1MzExNzY1NzQsImV4cCI6MTUzMTE4MDE3NCwiYXVkIjoiMzYzOTQ4Yjc1NDc3MWQ4MjM2ODlkZmM3OWU0OTUyZTc3N2ZjM2Q2MSIsImRhdGEiOnsibm9tYnJlIjoiZW5jYXJnYWRvIiwicGVyZmlsIjoiZW5jYXJnYWRvIn0sImFwcCI6IkFQSSBSRVNUIE1FRElBUyAyMDE4In0.DUsM6VorKo6ckrGX910BdoabDxNhQmcVOdg3Da_lOl0"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "idMedia",
+							"value": "1",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "nombreCliente",
+							"value": "Cecilia",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "importe",
+							"value": "1",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "foto",
+							"description": "",
+							"type": "file"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8080/Prog3_2018/Clase12/prueba/index.php/venta/",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Prog3_2018",
+						"Clase12",
+						"prueba",
+						"index.php",
+						"venta",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "modificar una venta",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "2d6be570-6014-480e-bb14-e1d8b0c86ba4",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					},
+					{
+						"key": "token",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1MzEyNDY3NzQsImV4cCI6MTUzMTI1MDM3NCwiYXVkIjoiMzYzOTQ4Yjc1NDc3MWQ4MjM2ODlkZmM3OWU0OTUyZTc3N2ZjM2Q2MSIsImRhdGEiOnsibm9tYnJlIjoiZW5jYXJnYWRvIiwicGVyZmlsIjoiZW5jYXJnYWRvIn0sImFwcCI6IkFQSSBSRVNUIE1FRElBUyAyMDE4In0.vZEkiOYZTPpbOLfVMjVNevkiOfUOM6B63M5n4m0eqak"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "id",
+							"value": "20",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "idMedia",
+							"value": "1",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "nombreCliente",
+							"value": "Susana",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "importe",
+							"value": "12",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "foto",
+							"description": "",
+							"type": "file"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8080/Prog3_2018/Clase12/prueba/index.php/venta/mod",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"Prog3_2018",
+						"Clase12",
+						"prueba",
+						"index.php",
+						"venta",
+						"mod"
+					]
+				},
+				"description": "usar body->x-www..."
+			},
+			"response": []
+		}
+	]
+}

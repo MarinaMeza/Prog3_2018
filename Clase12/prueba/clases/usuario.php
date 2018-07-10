@@ -32,7 +32,7 @@ class Usuario{
         clave = '$clave' and 
         perfil = '$perfil'");
         $consulta->execute();
-        $usuarioBuscado= $consulta->fetchObject('Usuario');
+        $usuarioBuscado = $consulta->fetchObject('Usuario');
         return $usuarioBuscado; 
     }
 

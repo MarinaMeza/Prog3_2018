@@ -7,6 +7,7 @@ require __DIR__.'/vendor/autoload.php';
 require_once './clases/AccesoDatos.php';
 require_once './clases/mediaApi.php';
 require_once './clases/UsuarioApi.php';
+require_once './clases/ventaApi.php';
 require_once './clases/AutentificadorJWT.php';
 require_once './clases/MWparaCORS.php';
 require_once './clases/MWparaAutentificar.php';
@@ -37,13 +38,13 @@ $app->group('/media', function () {
 
   $this->get('/F', \mediaApi::class . ':traerTodosFiltrado')->add(\MWparaCORS::class . ':HabilitarCORSTodos');
  
-  $this->get('/{id}', \mediaApi::class . ':traerUno')->add(\MWparaCORS::class . ':HabilitarCORSTodos');
+  //$this->get('/{id}', \mediaApi::class . ':traerUno')->add(\MWparaCORS::class . ':HabilitarCORSTodos');
 
   $this->post('/', \mediaApi::class . ':CargarUno');
 
-  $this->delete('/', \mediaApi::class . ':BorrarUno')->add(\MWparaAutentificar::class . ':VerificarUsuario');
+  $this->delete('/', \mediaApi::class . ':BorrarUno')->add(\MWparaAutentificar::class . ':VerificarUsuarioDueño');
 
-  $this->put('/', \mediaApi::class . ':ModificarUno');
+  //$this->put('/', \mediaApi::class . ':ModificarUno');
      
 })->add(\MWparaCORS::class . ':HabilitarCORS8080');
 
@@ -51,17 +52,32 @@ $app->group('/usuario', function () {
  
   $this->get('/', \usuarioApi::class . ':traerTodos')->add(\MWparaAutentificar::class . ':VerificarUsuario')->add(\MWparaCORS::class . ':HabilitarCORSTodos');
   
-  $this->get('/{id}', \usuarioApi::class . ':traerUno')->add(\MWparaCORS::class . ':HabilitarCORSTodos');
+  //$this->get('/{id}', \usuarioApi::class . ':traerUno')->add(\MWparaCORS::class . ':HabilitarCORSTodos');
   
   $this->post('/', \usuarioApi::class . ':CargarUno');
   
   $this->post('/login', \usuarioApi::class . ':CrearToken')->add(\MWparaCORS::class . ':HabilitarCORSTodos'); 
 
-  $this->delete('/', \usuarioApi::class . ':BorrarUno');
+  //$this->delete('/', \usuarioApi::class . ':BorrarUno');
 
-  $this->put('/', \usuarioApi::class . ':ModificarUno');
+  //$this->put('/', \usuarioApi::class . ':ModificarUno');
      
 })->add(\MWparaCORS::class . ':HabilitarCORS8080');
 
+$app->group('/venta', function () {
+ 
+  //$this->get('/', \ventaApi::class . ':traerTodos')->add(\MWparaAutentificar::class . ':VerificarUsuario')->add(\MWparaCORS::class . ':HabilitarCORSTodos');
+  
+  //$this->get('/{id}', \ventaApi::class . ':traerUno')->add(\MWparaCORS::class . ':HabilitarCORSTodos');
+  
+  $this->post('/', \ventaApi::class . ':CargarUno')->add(\MWparaAutentificar::class . ':VerificarUsuarioEmpEnc');
+  
+  //$this->post('/login', \ventaApi::class . ':CrearToken')->add(\MWparaCORS::class . ':HabilitarCORSTodos'); 
+
+  //$this->delete('/', \ventaApi::class . ':BorrarUno');
+
+  $this->post('/mod', \ventaApi::class . ':ModificarUno')->add(\MWparaAutentificar::class . ':VerificarUsuarioEnc');
+     
+})->add(\MWparaCORS::class . ':HabilitarCORS8080');
 
 $app->run();
