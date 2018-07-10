@@ -8,6 +8,7 @@ require_once './clases/AccesoDatos.php';
 require_once './clases/mediaApi.php';
 require_once './clases/UsuarioApi.php';
 require_once './clases/ventaApi.php';
+require_once './clases/loginApi.php';
 require_once './clases/AutentificadorJWT.php';
 require_once './clases/MWparaCORS.php';
 require_once './clases/MWparaAutentificar.php';
@@ -57,6 +58,22 @@ $app->group('/usuario', function () {
   $this->post('/', \usuarioApi::class . ':CargarUno');
   
   $this->post('/login', \usuarioApi::class . ':CrearToken')->add(\MWparaCORS::class . ':HabilitarCORSTodos'); 
+
+  //$this->delete('/', \usuarioApi::class . ':BorrarUno');
+
+  //$this->put('/', \usuarioApi::class . ':ModificarUno');
+     
+})->add(\MWparaCORS::class . ':HabilitarCORS8080');
+
+$app->group('/login', function () {
+ 
+  //$this->get('/', \usuarioApi::class . ':traerTodos')->add(\MWparaAutentificar::class . ':VerificarUsuario')->add(\MWparaCORS::class . ':HabilitarCORSTodos');
+  
+  //$this->get('/{id}', \usuarioApi::class . ':traerUno')->add(\MWparaCORS::class . ':HabilitarCORSTodos');
+  
+  //$this->post('/', \usuarioApi::class . ':CargarUno');
+  
+  $this->post('/', \loginApi::class . ':CrearToken')->add(\MWparaCORS::class . ':HabilitarCORSTodos'); 
 
   //$this->delete('/', \usuarioApi::class . ':BorrarUno');
 
