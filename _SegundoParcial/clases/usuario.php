@@ -17,6 +17,13 @@ class Usuario{
         return $objetoAccesoDato->RetornarUltimoIdInsertado();
     }
 
+    public static function TraerTodosLosUsuarios() {
+        $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
+        $consulta =$objetoAccesoDato->RetornarConsulta("select id,nombre,clave,sexo,perfil from usuario");
+        $consulta->execute();			
+        return $consulta->fetchAll(PDO::FETCH_CLASS, "Usuario");		
+    }
+
     public static function TraerUnUsuario($nombre, $clave, $sexo) {
         $objetoAccesoDato = AccesoDatos::dameUnObjetoAcceso(); 
         $consulta = $objetoAccesoDato->RetornarConsulta("

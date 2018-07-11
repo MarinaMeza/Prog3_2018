@@ -65,7 +65,7 @@ class usuarioApi extends Usuario implements IApiUsable{
         return $newresponse;
     }
 
-    public function BorrarUno($request, $response, $args) {
+    public function BorrarUno($request, $response, $args) {/*
         $ArrayDeParametros = $request->getParsedBody();
         $id=$ArrayDeParametros['id'];
         $usuario= new Usuario();
@@ -80,14 +80,14 @@ class usuarioApi extends Usuario implements IApiUsable{
             $objDelaRespuesta->resultado="no Borro nada!!!<br>".$ArrayDeParametros;
         }
         $newResponse = $response->withJson($objDelaRespuesta, 200);  
-        return $newResponse;
+        return $newResponse;*/
    }
     
     public function ModificarUno($request, $response, $args) {
         //$response->getBody()->write("<h1>Modificar  uno</h1>");
-        $ArrayDeParametros = $request->getParsedBody();
+        //$ArrayDeParametros = $request->getParsedBody();
         //var_dump($ArrayDeParametros);    	
-        $miUsuario = new Usuario();
+        /*$miUsuario = new Usuario();
         $miUsuario->id=$ArrayDeParametros['id'];
         $miUsuario->nombre=$ArrayDeParametros['nombre'];
         $miUsuario->clave=$ArrayDeParametros['clave'];
@@ -97,26 +97,8 @@ class usuarioApi extends Usuario implements IApiUsable{
         //var_dump($resultado);
         $objDelaRespuesta->resultado=$resultado;
         $objDelaRespuesta->tarea="modificar";
-        return $response->withJson($objDelaRespuesta, 200);
+        return $response->withJson($objDelaRespuesta, 200);*/
    }
 
-   public function CrearToken($request, $response, $args) {
-        $ArrayDeParametros = $request->getParsedBody();
-        $nombre= $ArrayDeParametros['nombre'];
-        $clave= $ArrayDeParametros['clave'];
-        $perfil= $ArrayDeParametros['perfil'];
-        //var_dump($ArrayDeParametros);
-        $miUsuario = new Usuario();
-        $resultado = $miUsuario->TraerUnUsuario($nombre, $clave, $perfil);
-        //var_dump($resultado);
-        if (!$resultado) {
-            $newResponse = "Los datos ingresados son incorrectos";
-        } else {
-            $data = array('nombre' => $nombre, 'perfil' => $perfil);
-            $token = AutentificadorJWT::CrearToken($data);
-            $newResponse = $response->withJson($token, 200);
-        }
-        return $newResponse;
-   }
 }
 ?>

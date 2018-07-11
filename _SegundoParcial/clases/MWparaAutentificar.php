@@ -21,6 +21,56 @@ class MWparaAutentificar {
 		$objDelaRespuesta= new stdclass();
 		$objDelaRespuesta->respuesta="";
 	   
+		if($request->isGet()) {
+			//$response->getBody()->write('<p>NO necesita credenciales para los get </p>');
+			$response = $next($request, $response);
+		} else {
+			$objDelaRespuesta->esValido = true;
+			try {
+				$token = $request->getHeader('token')[0];
+				AutentificadorJWT::verificarToken($token);
+				$objDelaRespuesta->esValido = true; 
+			}
+			catch (Exception $e) {
+				//guardar en un log
+				$objDelaRespuesta->excepcion = $e->getMessage();
+				$objDelaRespuesta->esValido = false;
+			}
+
+			if($objDelaRespuesta->esValido) {
+				if($request->isGet()) {
+					// el post sirve para todos los logeados
+					$response = $next($request, $response);
+				}else {
+					$payload=AutentificadorJWT::ObtenerData($token);
+					//var_dump($payload);
+					// DELETE,PUT y DELETE sirve para todos los logeados y admin
+					if($payload->nombre=="admin" || $payload->nombre == "usuario" || $payload->nombre == "prueba") {
+						$response = $next($request, $response);
+					}else {	
+						$objDelaRespuesta->respuesta="Solo administradores";
+					}
+				}
+			}else {
+				//$response->getBody()->write('<p>no tenes habilitado el ingreso</p>');
+				$objDelaRespuesta->respuesta="Solo usuarios registrados";
+				$objDelaRespuesta->elToken=$token;
+			}
+		}
+		if($objDelaRespuesta->respuesta!="") {
+			$nueva=$response->withJson($objDelaRespuesta, 401);
+			return $nueva;
+		}
+		
+		 //$response->getBody()->write('<p>vuelvo del verificador de credenciales</p>');
+		return $response;
+	}
+
+	public function VerificarUsuarioAdmin($request, $response, $next) {
+         
+		$objDelaRespuesta= new stdclass();
+		$objDelaRespuesta->respuesta="";
+	   
 		if($request->isPost()) {
 			//$response->getBody()->write('<p>NO necesita credenciales para los get </p>');
 			$response = $next($request, $response);
@@ -43,12 +93,12 @@ class MWparaAutentificar {
 					$response = $next($request, $response);
 				}else {
 					$payload=AutentificadorJWT::ObtenerData($token);
-					//var_dump($payload);
+					//var_dump($payload->nombre);
 					// DELETE,PUT y DELETE sirve para todos los logeados y admin
-					if($payload->perfil=="dueño" || $payload->perfil == "empleado" || $payload->perfil == "encargado") {
+					if($payload->nombre=="admin") {
 						$response = $next($request, $response);
 					}else {	
-						$objDelaRespuesta->respuesta="Solo administradores";
+						$objDelaRespuesta->respuesta="Hola";
 					}
 				}
 			}else {
@@ -61,155 +111,58 @@ class MWparaAutentificar {
 			$nueva=$response->withJson($objDelaRespuesta, 401);
 			return $nueva;
 		}
+		 //$response->getBody()->write('<p>vuelvo del verificador de credenciales</p>');
+		 return $response;
+	}
+
+	public function RetornaUsuario($request, $response, $next) {
 		
-		 //$response->getBody()->write('<p>vuelvo del verificador de credenciales</p>');
-		return $response;
-	}
+	   $objDelaRespuesta= new stdclass();
+	   $objDelaRespuesta->respuesta="";
+	  
+	   if($request->isGet()) {
+		   //$response->getBody()->write('<p>NO necesita credenciales para los get </p>');
+		   $response = $next($request, $response);
+	   } else {
+		   $objDelaRespuesta->esValido = true;
+		   try {
+			   $token = $request->getHeader('token')[0];
+			   AutentificadorJWT::verificarToken($token);
+			   $objDelaRespuesta->esValido = true; 
+		   }
+		   catch (Exception $e) {
+			   //guardar en un log
+			   $objDelaRespuesta->excepcion = $e->getMessage();
+			   $objDelaRespuesta->esValido = false;
+		   }
 
-	public function VerificarUsuarioDueño($request, $response, $next) {
-         
-		$objDelaRespuesta= new stdclass();
-		$objDelaRespuesta->respuesta="";
+		   if($objDelaRespuesta->esValido) {
+			   if($request->isGet()) {
+				   // el post sirve para todos los logeados
+				   $response = $next($request, $response);
+			   }else {
+				   $payload=AutentificadorJWT::ObtenerData($token);
+				   //var_dump($payload);
+				   // DELETE,PUT y DELETE sirve para todos los logeados y admin
+				   if($payload->nombre=="admin" || $payload->nombre == "usuario" || $payload->nombre == "prueba") {
+					   $response = $next($request, $response);
+					   return $payload->nombre;
+				   }else {	
+					   $objDelaRespuesta->respuesta="Solo administradores";
+				   }
+			   }
+		   }else {
+			   //$response->getBody()->write('<p>no tenes habilitado el ingreso</p>');
+			   $objDelaRespuesta->respuesta="Solo usuarios registrados";
+			   $objDelaRespuesta->elToken=$token;
+		   }
+	   }
+	   if($objDelaRespuesta->respuesta!="") {
+		   $nueva=$response->withJson($objDelaRespuesta, 401);
+		   return $nueva;
+	   }
 	   
-		if($request->isGet()) {
-			//$response->getBody()->write('<p>NO necesita credenciales para los get </p>');
-			$response = $next($request, $response);
-		} else {
-			$objDelaRespuesta->esValido = true;
-			try {
-				$token = $request->getHeader('token')[0];
-				AutentificadorJWT::verificarToken($token);
-				$objDelaRespuesta->esValido = true; 
-			}
-			catch (Exception $e) {
-				//guardar en un log
-				$objDelaRespuesta->excepcion = $e->getMessage();
-				$objDelaRespuesta->esValido = false;
-			}
-
-			if($objDelaRespuesta->esValido) {
-				if($request->isGet()) {
-					// el post sirve para todos los logeados
-					$response = $next($request, $response);
-				}else {
-					$payload=AutentificadorJWT::ObtenerData($token);
-					//var_dump($payload);
-					// DELETE,PUT y DELETE sirve para todos los logeados y admin
-					if($payload->perfil=="dueño") {
-						$response = $next($request, $response);
-					}else {	
-						$objDelaRespuesta->respuesta="Solo dueño";
-					}
-				}
-			}else {
-				//$response->getBody()->write('<p>no tenes habilitado el ingreso</p>');
-				$objDelaRespuesta->respuesta="Solo usuarios registrados";
-				$objDelaRespuesta->elToken=$token;
-			}
-		}
-		if($objDelaRespuesta->respuesta!="") {
-			$nueva=$response->withJson($objDelaRespuesta, 401);
-			return $nueva;
-		}
-		 //$response->getBody()->write('<p>vuelvo del verificador de credenciales</p>');
-		 return $response;
-	}
-
-	public function VerificarUsuarioEmpEnc($request, $response, $next) {
-         
-		$objDelaRespuesta= new stdclass();
-		$objDelaRespuesta->respuesta="";
-	   
-		if($request->isGet()) {
-			//$response->getBody()->write('<p>NO necesita credenciales para los get </p>');
-			$response = $next($request, $response);
-		} else {
-			$objDelaRespuesta->esValido = true;
-			try {
-				$token = $request->getHeader('token')[0];
-				AutentificadorJWT::verificarToken($token);
-				$objDelaRespuesta->esValido = true; 
-			}
-			catch (Exception $e) {
-				//guardar en un log
-				$objDelaRespuesta->excepcion = $e->getMessage();
-				$objDelaRespuesta->esValido = false;
-			}
-
-			if($objDelaRespuesta->esValido) {
-				if($request->isGet()) {
-					// el post sirve para todos los logeados
-					$response = $next($request, $response);
-				}else {
-					$payload=AutentificadorJWT::ObtenerData($token);
-					//var_dump($payload);
-					// DELETE,PUT y DELETE sirve para todos los logeados y admin
-					if($payload->perfil=="empleado" || $payload->perfil == "encargado") {
-						$response = $next($request, $response);
-					}else {	
-						$objDelaRespuesta->respuesta="Solo empleados o encargados";
-					}
-				}
-			}else {
-				//$response->getBody()->write('<p>no tenes habilitado el ingreso</p>');
-				$objDelaRespuesta->respuesta="Solo usuarios registrados";
-				$objDelaRespuesta->elToken=$token;
-			}
-		}
-		if($objDelaRespuesta->respuesta!="") {
-			$nueva=$response->withJson($objDelaRespuesta, 401);
-			return $nueva;
-		}
-		 //$response->getBody()->write('<p>vuelvo del verificador de credenciales</p>');
-		 return $response;
-	}
-
-	public function VerificarUsuarioEnc($request, $response, $next) {
-         
-		$objDelaRespuesta= new stdclass();
-		$objDelaRespuesta->respuesta="";
-	   
-		if($request->isGet()) {
-			//$response->getBody()->write('<p>NO necesita credenciales para los get </p>');
-			$response = $next($request, $response);
-		} else {
-			$objDelaRespuesta->esValido = true;
-			try {
-				$token = $request->getHeader('token')[0];
-				AutentificadorJWT::verificarToken($token);
-				$objDelaRespuesta->esValido = true; 
-			}
-			catch (Exception $e) {
-				//guardar en un log
-				$objDelaRespuesta->excepcion = $e->getMessage();
-				$objDelaRespuesta->esValido = false;
-			}
-
-			if($objDelaRespuesta->esValido) {
-				if($request->isGet()) {
-					// el post sirve para todos los logeados
-					$response = $next($request, $response);
-				}else {
-					$payload=AutentificadorJWT::ObtenerData($token);
-					//var_dump($payload);
-					// DELETE,PUT y DELETE sirve para todos los logeados y admin
-					if($payload->perfil == "encargado") {
-						$response = $next($request, $response);
-					}else {	
-						$objDelaRespuesta->respuesta="Solo encargados";
-					}
-				}
-			}else {
-				//$response->getBody()->write('<p>no tenes habilitado el ingreso</p>');
-				$objDelaRespuesta->respuesta="Solo usuarios registrados";
-				$objDelaRespuesta->elToken=$token;
-			}
-		}
-		if($objDelaRespuesta->respuesta!="") {
-			$nueva=$response->withJson($objDelaRespuesta, 401);
-			return $nueva;
-		}
-		 //$response->getBody()->write('<p>vuelvo del verificador de credenciales</p>');
-		 return $response;
-	}
+		//$response->getBody()->write('<p>vuelvo del verificador de credenciales</p>');
+	   return $response;
+   }
 }

@@ -7,9 +7,12 @@ require __DIR__.'/vendor/autoload.php';
 require_once './clases/AccesoDatos.php';
 require_once './clases/UsuarioApi.php';
 require_once './clases/loginApi.php';
+require_once './clases/compraApi.php';
 require_once './clases/AutentificadorJWT.php';
 require_once './clases/MWparaCORS.php';
 require_once './clases/MWparaAutentificar.php';
+require_once './clases/MWLog.php';
+
 
 $config['displayErrorDetails'] = true;
 $config['addContentLengthHeader'] = false;
@@ -33,58 +36,28 @@ $app = new \Slim\App(["settings" => $config]);
 /*LLAMADA A METODOS DE INSTANCIA DE UNA CLASE*/
 $app->group('/usuario', function () {
   
-   //$this->get('/', \usuarioApi::class . ':traerTodos')->add(\MWparaAutentificar::class . ':VerificarUsuario')->add(\MWparaCORS::class . ':HabilitarCORSTodos');
-   
-   //$this->get('/{id}', \usuarioApi::class . ':traerUno')->add(\MWparaCORS::class . ':HabilitarCORSTodos');
+   $this->get('/', \usuarioApi::class . ':traerTodos')->add(\MWparaAutentificar::class . ':VerificarUsuarioAdmin');
    
    $this->post('/', \usuarioApi::class . ':CargarUno');
    
-   //$this->post('/login', \usuarioApi::class . ':CrearToken')->add(\MWparaCORS::class . ':HabilitarCORSTodos'); 
- 
-   //$this->delete('/', \usuarioApi::class . ':BorrarUno');
- 
-   //$this->put('/', \usuarioApi::class . ':ModificarUno');
-      
- })->add(\MWparaCORS::class . ':HabilitarCORS8080');
+ })->add(\MWparaCORS::class . ':HabilitarCORSTodos')->add(\MWparaCORS::class . ':HabilitarCORS8080');
 
 
  $app->group('/login', function () {
 
    $this->post('/', \loginApi::class . ':CrearToken')->add(\MWparaCORS::class . ':HabilitarCORSTodos'); 
-   
+
  })->add(\MWparaCORS::class . ':HabilitarCORS8080');
 
-$app->group('/media', function () {
- 
-  $this->get('/', \mediaApi::class . ':traerTodos')->add(\MWparaCORS::class . ':HabilitarCORSTodos');
 
-  $this->get('/F', \mediaApi::class . ':traerTodosFiltrado')->add(\MWparaCORS::class . ':HabilitarCORSTodos');
- 
-  //$this->get('/{id}', \mediaApi::class . ':traerUno')->add(\MWparaCORS::class . ':HabilitarCORSTodos');
-
-  $this->post('/', \mediaApi::class . ':CargarUno');
-
-  $this->delete('/', \mediaApi::class . ':BorrarUno')->add(\MWparaAutentificar::class . ':VerificarUsuarioDueño');
-
-  //$this->put('/', \mediaApi::class . ':ModificarUno');
-     
-})->add(\MWparaCORS::class . ':HabilitarCORS8080');
-
-
-$app->group('/venta', function () {
- 
-  //$this->get('/', \ventaApi::class . ':traerTodos')->add(\MWparaAutentificar::class . ':VerificarUsuario')->add(\MWparaCORS::class . ':HabilitarCORSTodos');
+ $app->group('/compra', function () {
   
-  //$this->get('/{id}', \ventaApi::class . ':traerUno')->add(\MWparaCORS::class . ':HabilitarCORSTodos');
-  
-  $this->post('/', \ventaApi::class . ':CargarUno')->add(\MWparaAutentificar::class . ':VerificarUsuarioEmpEnc');
-  
-  //$this->post('/login', \ventaApi::class . ':CrearToken')->add(\MWparaCORS::class . ':HabilitarCORSTodos'); 
+   $this->get('/', \compraApi::class . ':traerFiltrado')->add(\MWparaAutentificar::class . ':VerificarUsuario');
+   
+   $this->post('/', \compraApi::class . ':CargarUno')->add(\MWparaAutentificar::class . ':VerificarUsuario');
+      
+ })->add(\MWparaCORS::class . ':HabilitarCORSTodos')->add(\MWparaCORS::class . ':HabilitarCORS8080');
 
-  //$this->delete('/', \ventaApi::class . ':BorrarUno');
 
-  $this->post('/mod', \ventaApi::class . ':ModificarUno')->add(\MWparaAutentificar::class . ':VerificarUsuarioEnc');
-     
-})->add(\MWparaCORS::class . ':HabilitarCORS8080');
 
 $app->run();
